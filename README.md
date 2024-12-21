@@ -3,8 +3,9 @@ Drift Downloader
 
 This project will enable automatic downloading of videos from a drift device.
 
-1. Endpoints related to drift control can be found in BossDefine.java - this is from the [Drift SDK](https://us.driftinnovation.com/blogs/news/drift-link-a-brand-new-open-source-app-for-android)
-2. Use the following endpoints:
+1. Connect to the Camera AP
+2. Endpoints related to drift control can be found in BossDefine.java - this is from the [Drift SDK](https://us.driftinnovation.com/blogs/news/drift-link-a-brand-new-open-source-app-for-android)
+3. Use the following endpoints:
 
 **Get all files (assuming folder is 100MEDIA**
 
