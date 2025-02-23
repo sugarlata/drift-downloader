@@ -3,18 +3,35 @@ Drift Downloader
 
 This project will enable automatic downloading of videos from a drift device.
 
-1. Connect to the Camera AP
-2. Endpoints related to drift control can be found in BossDefine.java - this is from the [Drift SDK](https://us.driftinnovation.com/blogs/news/drift-link-a-brand-new-open-source-app-for-android)
-3. Use the following endpoints:
+# Structure
 
-**Get all files (assuming folder is 100MEDIA**
+The repo is in a clean architecture structure (stripped back the domain/repo level to avoid over-engineering) 
 
-```
-http://192.168.42.1/cgi-bin/foream_remote_control?list_files=/tmp/SD0/DCIM/100MEDIA
-```
+# Running the script
 
-**Download a file**
+Currently script only supports Windows.
+
+Ensure you have a .env file with the following:
 
 ```
-http://192.168.42.1/DCIM/100MEDIA/VID00019.MP4
+LOCAL_FILES_LOCATION=
+GHOST_WIFI_AP=""
+NORMAL_WIFI_APP=""
 ```
+
+Run the script:
+
+`uv run app/main.py`
+
+Script will:
+
+1. Get list of video files
+2. Download each file
+3. Validate matching file size
+4. If local file is now valid, delete on the Ghost XL.
+
+# References
+
+See `BossDefine.java`, this is from the Android app and contains constants for API calls on the Ghost XL.
+
+Alternatively, other documentation can be found in the [Drift SDK](https://us.driftinnovation.com/blogs/news/drift-link-a-brand-new-open-source-app-for-android)
