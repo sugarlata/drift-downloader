@@ -5,5 +5,5 @@ load_dotenv()
 
 
 LOCAL_FILES_LOCATION = os.getenv("LOCAL_FILES_LOCATION")
-GHOST_WIFI_AP = os.getenv("GHOST_WIFI_AP")
-NORMAL_WIFI_AP = os.getenv("NORMAL_WIFI_AP")
+GHOST_WIFI_SSID = os.getenv("GHOST_WIFI_AP")
+NORMAL_WIFI_SSID = os.getenv("NORMAL_WIFI_AP")

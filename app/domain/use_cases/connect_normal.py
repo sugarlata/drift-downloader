@@ -1,5 +1,5 @@
-from app.data.data_sources.ap import APManager
+from app.domain.repositories.ap_manager import APManager
 
 
 def connect_normal():
-    APManager.connect_normal()
+    APManager().connect_normal()

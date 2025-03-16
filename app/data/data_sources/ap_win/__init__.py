@@ -2,12 +2,10 @@ import winwifi
 
 from loguru import logger
 
-from app.constants import GHOST_WIFI_AP, NORMAL_WIFI_AP
 
+class WinAPManager:
 
-class APManager:
-
-    def _connect(ssid: str):
+    def connect(ssid: str):
 
         connected_ssid = winwifi.WinWiFi.get_connected_interfaces()[0].ssid
 
@@ -22,11 +20,3 @@ class APManager:
             raise e
 
         logger.debug(f"Completed Connection to {ssid}")
-
-    @classmethod
-    def connect_ghost(cls):
-        cls._connect(GHOST_WIFI_AP)
-
-    @classmethod
-    def connect_normal(cls):
-        cls._connect(NORMAL_WIFI_AP)

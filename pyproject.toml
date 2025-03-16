@@ -6,10 +6,10 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "loguru>=0.7.3",
-    "plumbum>=1.9.0",
+    "plumbum>=1.9.0 ; sys_platform == 'win32'",
     "python-dotenv>=1.0.1",
     "pytz>=2025.1",
     "requests>=2.32.3",
-    "winwifi>=1.0.5",
+    "winwifi>=1.0.5 ; sys_platform == 'win32'",
     "xmltodict>=0.14.2",
 ]
