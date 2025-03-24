@@ -1,0 +1,26 @@
+name: Deploy Drift Download
+
+on:
+  push:
+    branches:
+      - main  # Adjust as needed
+    paths:
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'app/**'
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, nathan-nuc]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Copy Script and Service Files
+        run: |
+          sudo mkdir -p /usr/local/src/nathan-source/drift-downloader
+          sudo cp app/ /usr/local/src/nathan-source/drift-downloader -r
+          sudo cp pyproject.toml /usr/local/src/nathan-source/drift-downloader
+          sudo cp uv.lock /usr/local/src/nathan-source/drift-downloader
+          sudo chown nathan:nathan /usr/local/src/nathan-source/drift-downloader -R

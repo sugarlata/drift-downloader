@@ -2,7 +2,7 @@ import os
 
 from app.constants import LOCAL_FILES_LOCATION
 from app.data.data_sources.drift import DriftConnection
-from app.data.data_sources.file_io import FileIO
+from app.data.data_sources.file_io import FileIODataSource
 from app.data.models import GhostFile
 
 
@@ -16,7 +16,7 @@ def download_files(file_list: list[GhostFile]):
 
         DriftConnection.get_file(file, local_file_path)
 
-        local_file_size = FileIO.get_local_file_size(local_file_path)
+        local_file_size = FileIODataSource.get_local_file_size(local_file_path)
 
         if local_file_size == file.size:
             DriftConnection.delete_file(file)

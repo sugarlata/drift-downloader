@@ -1,0 +1,34 @@
+name: Deploy Drift Download Systemd Service
+
+on:
+  push:
+    branches:
+      - main  # Adjust as needed
+    paths:
+      - 'systemd/**'
+
+jobs:
+  deploy:
+    runs-on: [self-hosted,nathan-nuc]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Copy Script and Service Files
+        run: |
+          echo "Copying script and service files..."
+          sudo mkdir -p /usr/local/src/nathan-source/drift-downloader
+          sudo cp systemd/run.sh /usr/local/src/nathan-source/drift-downloader/run.sh
+          sudo chmod +x /usr/local/src/nathan-source/drift-downloader/run.sh
+          sudo chown nathan:nathan /usr/local/src/nathan-source/drift-downloader -R
+
+      - name: Install/Update Systemd Service
+        run: |
+          echo "Installing systemd service..."
+          sudo cp systemd/drift-downloader.service /etc/systemd/system/drift-downloader.service
+          sudo cp systemd/drift-downloader.timer /etc/systemd/system/drift-downloader.timer
+          sudo systemctl daemon-reload
+          sudo systemctl enable drift-downloader.timer
+          sudo systemctl restart drift-downloader.timer
+          sudo systemctl restart drift-downloader.service
