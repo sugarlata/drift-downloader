@@ -1,3 +1,4 @@
+from app.domain.use_cases.perform_connect_download import perform_connect_download
 from app.domain.use_cases.check_lock_file import CheckLockFile
 from app.domain.use_cases.create_lock_file import CreateLockFile
 from app.domain.use_cases.delete_lock_file import DeleteLockFile
@@ -15,15 +16,7 @@ def main():
         CreateLockFile().execute()
 
     try:
-        connect_ghost()
-    except RuntimeError:
-        return
-
-    file_list = get_file_list()
-    download_files(file_list)
-
-    try:
-        connect_normal()
+        perform_connect_download()
     except RuntimeError:
         return
 

@@ -8,20 +8,6 @@ from app.domain.use_cases.get_file_list import get_file_list
 def perform_connect_download():
 
     try:
-        HomeAPI.send_message(
-            title="Ghost Downloader",
-            message="Starting to Download from the Ghost",
-        )
-    except Exception as e:
-        print(f"Error sending message: {e}")
-        return
-
-    HomeAPI.send_message(
-        title="Ghost Downloader",
-        message="Connecting to the Ghost",
-    )
-
-    try:
         connect_ghost()
     except RuntimeError as e:
         HomeAPI.send_message(
@@ -30,14 +16,6 @@ def perform_connect_download():
         )
         return
 
-    HomeAPI.send_message(
-        title="Ghost Downloader",
-        message="Connected to the Ghost",
-    )
-    HomeAPI.send_message(
-        title="Ghost Downloader",
-        message="Getting File List",
-    )
     try:
         file_list = get_file_list()
     except Exception as e:
@@ -47,10 +25,12 @@ def perform_connect_download():
         )
         return
 
-    HomeAPI.send_message(
-        title="Ghost Downloader",
-        message="Downloading Files",
-    )
+    if file_list:
+        HomeAPI.send_message(
+            title="Ghost Downloader",
+            message="Drift Downloader has started downloading files... Do not plug in the Ghost",
+        )
+
     try:
         download_files(file_list)
     except Exception as e:
@@ -60,10 +40,12 @@ def perform_connect_download():
         )
         return
 
-    HomeAPI.send_message(
-        title="Ghost Downloader",
-        message="Connecting back to Normal Network",
-    )
+    if file_list:
+        HomeAPI.send_message(
+            title="Ghost Downloader",
+            message="Drift Downloader has finished downloading files",
+        )
+
     try:
         connect_normal()
     except Exception as e:
