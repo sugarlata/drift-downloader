@@ -10,10 +10,6 @@ def perform_connect_download():
     try:
         connect_ghost()
     except RuntimeError as e:
-        HomeAPI.send_message(
-            title="Ghost Downloader",
-            message=f"Could not connect to the Ghost ({e})",
-        )
         return
 
     try:

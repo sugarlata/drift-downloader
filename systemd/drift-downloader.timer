@@ -4,7 +4,7 @@ Description=Run drift downloader every 10 minutes
 [Timer]
 OnBootSec=1min
 OnUnitActiveSec=10min
-Unit=drift_downloader.service
+Unit=drift-downloader.service
 
 [Install]
 WantedBy=timers.target

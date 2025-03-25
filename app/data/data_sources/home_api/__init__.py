@@ -8,11 +8,13 @@ class HomeAPI:
     @staticmethod
     def send_message(title: str, message: str):
 
+        json_body = NotificationTelegramSendRequest(
+            title=title,
+            message=message,
+        ).model_dump()
+
         response = requests.post(
             "http://192.168.5.250:10000/notifications/telegram/send",
-            json=NotificationTelegramSendRequest(
-                title=title,
-                message=message,
-            ).model_dump_json(),
+            json=json_body,
         )
         response.raise_for_status()
