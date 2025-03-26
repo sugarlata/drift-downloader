@@ -45,8 +45,4 @@ def perform_connect_download():
     try:
         connect_normal()
     except Exception as e:
-        HomeAPI.send_message(
-            title="Ghost Downloader",
-            message=f"Could not connect back to normal network ({e})",
-        )
         return
