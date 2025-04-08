@@ -1,8 +1,11 @@
+from loguru import logger
+
 from app.data.data_sources.home_api import HomeAPI
 from app.domain.use_cases.connect_ghost import connect_ghost
 from app.domain.use_cases.connect_normal import connect_normal
 from app.domain.use_cases.download_files import download_files
 from app.domain.use_cases.get_file_list import get_file_list
+from app.domain.use_cases.update_time import update_time
 
 
 def perform_connect_download():
@@ -11,6 +14,11 @@ def perform_connect_download():
         connect_ghost()
     except RuntimeError as e:
         return
+
+    try:
+        update_time()
+    except Exception as e:
+        logger.error(f"Could not update time ({e})")
 
     try:
         file_list = get_file_list()

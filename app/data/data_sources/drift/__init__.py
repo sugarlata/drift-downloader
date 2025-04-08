@@ -13,6 +13,7 @@ class DriftConnection:
 
     BASE_URL = "http://192.168.42.1"
     GET_FILE_LIST = "/cgi-bin/foream_remote_control?list_files=/tmp/SD0/DCIM/100MEDIA"
+    SET_TIME = "/cgi-bin/foream_remote_control?set_time="
     DOWNLOAD_FILE = "/DCIM/100MEDIA/"
     DELETE_FILE = (
         "/cgi-bin/foream_remote_control?delete_media_file=/tmp/SD0/DCIM/100MEDIA/"
@@ -73,3 +74,11 @@ class DriftConnection:
 
         delete_url = f"{cls.BASE_URL}{cls.DELETE_FILE}{file.filename}"
         requests.get(delete_url)
+
+    @classmethod
+    def update_time(cls):
+
+        dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        set_time_url = f"{cls.BASE_URL}{cls.SET_TIME}{dt}"
+        response = requests.get(set_time_url)
+        response.raise_for_status()
