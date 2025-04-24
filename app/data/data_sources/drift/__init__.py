@@ -57,12 +57,14 @@ class DriftConnection:
 
         download_url = f"{cls.BASE_URL}{cls.DOWNLOAD_FILE}{file.filename}"
 
-        with requests.get(download_url, stream=True) as r:
+        with requests.get(download_url, stream=True, timeout=10) as r:
             r.raise_for_status()
 
             completion = 0
             with open(local_path, "wb") as f:
                 for chunk in r.iter_content(chunk_size=cls.CHUNK_SIZE):
+                    if not chunk:
+                        logger.warning("Empty chunk received")
                     f.write(chunk)
                     completion += cls.CHUNK_SIZE
                     logger.debug(

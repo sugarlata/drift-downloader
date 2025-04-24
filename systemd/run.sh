@@ -7,4 +7,3 @@ echo "Starting Drift Downloader $(date)" >> /var/log/drift-downloader.log
 /home/nathan/.local/bin/uv sync >> /var/log/drift-downloader.log
 /home/nathan/.local/bin/uv run app/main.py >> /var/log/drift-downloader.log
 echo "Drift Downloader stopped $(date)" >> /var/log/drift-downloader.log
-
